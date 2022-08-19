@@ -3,16 +3,32 @@ title: "fiddler_baby_crabbies_sizes"
 author: "kelly"
 format: html
 editor: visual
+execute: 
+  warning: false
+  message: false
 ---
 
 ```{r}
 library(lterdatasampler)
 library(tidyverse)
+library(kableExtra)
 ```
 
 -   In the Quarto doc, create an exploratory (unfinalized) plot of fiddler crab carapace widths observed at the different latitudes
 
 ```{r}
 ggplot(data = pie_crab, aes(x = latitude, y = size)) +
-        geom_point()
+        geom_point()+
+ labs(caption = "this is my caption :)")
+```
+
+-   **Finalize the figure**. Add a figure caption using `#| fig-cap: "this is my caption"` in the code chunk where the graph is created. Update code chunk options (hint: `execute:` in YAML) so that only your finalized graph and figure caption show up in your knitted report (i.e., no code should show up)
+
+-   To your document, add an unfinalized summary table containing the mean, standard deviation, and sample size of fiddler crab carapace widths by site (tip: use `round(mean(), 2)` to round a value to 2 decimal places)
+
+```{r}
+pie_crab%>%
+ group_by(site)%>%
+ summarize(mean_width = round(mean(size, na.rm=TRUE),2),
+           sd_width = round(sd(size, na.rm = TRUE),2))
 ```
