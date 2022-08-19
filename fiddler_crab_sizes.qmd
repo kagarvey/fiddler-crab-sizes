@@ -27,8 +27,11 @@ ggplot(data = pie_crab, aes(x = latitude, y = size)) +
 -   To your document, add an unfinalized summary table containing the mean, standard deviation, and sample size of fiddler crab carapace widths by site (tip: use `round(mean(), 2)` to round a value to 2 decimal places)
 
 ```{r}
-pie_crab%>%
- group_by(site)%>%
+pie_crab %>%
+ group_by(site) %>%
  summarize(mean_width = round(mean(size, na.rm=TRUE),2),
-           sd_width = round(sd(size, na.rm = TRUE),2))
+           sd_width = round(sd(size, na.rm = TRUE),2)) |> 
+ kable(col.names = c("the place where the crab is...", "the mean of the width...", "the standard deviation of that thing dude..."))
+ 
+
 ```
